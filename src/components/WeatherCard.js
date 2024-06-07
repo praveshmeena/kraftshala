@@ -10,33 +10,27 @@ const WeatherCard = ({ weather, error }) => {
     return <div className="weather-card loading">Loading...</div>;
   }
 
-  const { name, main, weather: weatherInfo, dt } = weather;
+  const {
+    name,
+    main: { temp, feels_like, humidity },
+    weather: weatherInfo,
+    wind: { speed: windSpeed },
+    dt,
+    sys: { sunrise, sunset },
+  } = weather;
 
-  // More detailed checks
-  if (!name || typeof name !== "string") {
-    console.error("Invalid or missing city name:", name);
-    return <div className="weather-card error">Invalid city data</div>;
-  }
-
-  if (!main || typeof main.temp !== "number") {
-    console.error("Invalid or missing temperature data:", main);
-    return <div className="weather-card error">Invalid temperature data</div>;
-  }
-
+  // Validation checks
   if (
-    !Array.isArray(weatherInfo) ||
-    weatherInfo.length === 0 ||
-    typeof weatherInfo[0].description !== "string"
+    !name ||
+    !temp ||
+    !weatherInfo ||
+    !windSpeed ||
+    !dt ||
+    !sunrise ||
+    !sunset
   ) {
-    console.error("Invalid or missing weather description:", weatherInfo);
-    return (
-      <div className="weather-card error">Invalid weather description</div>
-    );
-  }
-
-  if (typeof dt !== "number") {
-    console.error("Invalid or missing date/time:", dt);
-    return <div className="weather-card error">Invalid date/time data</div>;
+    console.error("Invalid or missing weather data:", weather);
+    return <div className="weather-card error">Invalid weather data</div>;
   }
 
   // Format date and time
@@ -54,14 +48,41 @@ const WeatherCard = ({ weather, error }) => {
 
   const formattedDate = dateFormatter.format(new Date(dt * 1000));
   const formattedTime = timeFormatter.format(new Date(dt * 1000));
+  const formattedSunrise = timeFormatter.format(new Date(sunrise * 1000));
+  const formattedSunset = timeFormatter.format(new Date(sunset * 1000));
 
   return (
     <div className="weather-card">
       <h2>{name}</h2>
-      <p>Temperature: {Math.round(main.temp)}°C</p>
-      <p>Description: {weatherInfo[0].description}</p>
-      <p>Date: {formattedDate}</p>
-      <p>Time: {formattedTime}</p>
+      <div className="weather-main">
+        <p className="temp">{Math.round(temp)}°C</p>
+        <p className="description">{weatherInfo[0].description}</p>
+        <p>Feels like: {Math.round(feels_like)}°C</p>
+      </div>
+      <div className="weather-details">
+        <div className="detail-item">
+          <span className="detail-label">Humidity:</span>
+          <span className="detail-value">{humidity}%</span>
+        </div>
+        <div className="detail-item">
+          <span className="detail-label">Wind Speed:</span>
+          <span className="detail-value">
+            {Math.round(windSpeed * 3.6)} km/h
+          </span>
+        </div>
+        <div className="detail-item">
+          <span className="detail-label">Sunrise:</span>
+          <span className="detail-value">{formattedSunrise}</span>
+        </div>
+        <div className="detail-item">
+          <span className="detail-label">Sunset:</span>
+          <span className="detail-value">{formattedSunset}</span>
+        </div>
+      </div>
+      <div className="weather-date">
+        <p>Date: {formattedDate}</p>
+        <p>Time: {formattedTime}</p>
+      </div>
     </div>
   );
 };
