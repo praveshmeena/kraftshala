@@ -1,35 +1,13 @@
 import React from "react";
 
-const WeatherCard = ({ weather, error }) => {
-  if (error) {
-    return <div className="weather-card error">{error}</div>;
-  }
-
-  if (!weather) {
-    return <div className="weather-card loading">Loading...</div>;
-  }
-
+const WeatherCard = ({ weather, onRemove }) => {
   const {
     name,
     main: { temp, feels_like, humidity, temp_min, temp_max },
     weather: weatherInfo,
     wind: { speed: windSpeed },
     dt,
-    sys: { sunrise, sunset },
   } = weather;
-
-  if (
-    !name ||
-    !temp ||
-    !weatherInfo ||
-    !windSpeed ||
-    !dt ||
-    !temp_min ||
-    !temp_max
-  ) {
-    console.error("Invalid or missing weather data:", weather);
-    return <div className="weather-card error">Invalid weather data</div>;
-  }
 
   const dateFormatter = new Intl.DateTimeFormat("en-GB", {
     day: "2-digit",
@@ -48,6 +26,9 @@ const WeatherCard = ({ weather, error }) => {
 
   return (
     <div className="weather-card">
+      <button className="remove-btn" onClick={onRemove}>
+        ×
+      </button>
       <h2>{name}</h2>
       <div className="weather-main">
         <p className="temp">{Math.round(temp)}°C</p>

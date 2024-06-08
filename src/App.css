@@ -7,6 +7,14 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+.App main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
 /* Light Mode */
 .light-mode {
   background-color: #f0f0f0;
@@ -45,7 +53,9 @@ body {
   background-color: #012448;
   color: #ffffff;
 }
-
+.dark-mode .remove-btn {
+  color: #ddd;
+}
 /* Navbar */
 .navbar {
   display: flex;
@@ -120,6 +130,7 @@ main {
 }
 
 .weather-card {
+  position: relative;
   background-color: rgba(210, 209, 209, 0.3);
   padding: 2rem;
   border-radius: 8px;
@@ -132,6 +143,16 @@ main {
   margin-bottom: .5rem;
 }
 
+.remove-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
 .weather-card p {
   font-size: 1.1rem;
   margin: 0.5rem 0;

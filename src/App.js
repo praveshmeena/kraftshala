@@ -2,11 +2,10 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import WeatherCard from "./components/WeatherCard";
-import config from "./config";
 import "./App.css";
 
 function App() {
-  const [weather, setWeather] = useState(null);
+  const [weatherList, setWeatherList] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
   const [error, setError] = useState(null);
 
@@ -16,7 +15,6 @@ function App() {
 
   const fetchWeather = async (query) => {
     setError(null);
-    setWeather(null);
 
     try {
       const res = await fetch(
@@ -27,7 +25,7 @@ function App() {
       console.log("API Response:", data);
 
       if (res.ok && data.cod === 200) {
-        setWeather(data);
+        setWeatherList((prevList) => [...prevList, data]);
       } else {
         setError(data.message || "An error occurred");
       }
@@ -36,6 +34,11 @@ function App() {
       setError("Network error. Please try again.");
     }
   };
+
+  const removeLocation = (index) => {
+    setWeatherList((prevList) => prevList.filter((_, i) => i !== index));
+  };
+
   return (
     <div className={`App ${darkMode ? "dark-mode" : "light-mode"}`}>
       <Navbar
@@ -44,7 +47,14 @@ function App() {
         onToggle={() => setDarkMode(!darkMode)}
       />
       <main>
-        <WeatherCard weather={weather} error={error} />
+        {error && <div className="error">{error}</div>}
+        {weatherList.map((weather, index) => (
+          <WeatherCard
+            key={`${weather.name}-${index}`}
+            weather={weather}
+            onRemove={() => removeLocation(index)}
+          />
+        ))}
       </main>
     </div>
   );
