@@ -32,10 +32,15 @@ const WeatherCard = ({ weather, onRemove }) => {
       <h2>{name}</h2>
       <div className="weather-main">
         <p className="temp">{Math.round(temp)}°C</p>
-        <p className="description">{weatherInfo[0].description}</p>
-        <p>Feels like: {Math.round(feels_like)}°C</p>
       </div>
       <div className="weather-details">
+        <div className="detail-item">
+          <span className="detail-value">{weatherInfo[0].description}</span>
+        </div>
+        <div className="detail-item">
+          <span className="detail-label">Feels like:</span>
+          <span className="detail-value">{Math.round(feels_like)}°C</span>
+        </div>
         <div className="detail-item">
           <span className="detail-label">Humidity:</span>
           <span className="detail-value">{humidity}%</span>
