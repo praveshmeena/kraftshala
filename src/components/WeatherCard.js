@@ -1,4 +1,3 @@
-// src/components/WeatherCard.js
 import React from "react";
 
 const WeatherCard = ({ weather, error }) => {
@@ -12,28 +11,26 @@ const WeatherCard = ({ weather, error }) => {
 
   const {
     name,
-    main: { temp, feels_like, humidity },
+    main: { temp, feels_like, humidity, temp_min, temp_max },
     weather: weatherInfo,
     wind: { speed: windSpeed },
     dt,
     sys: { sunrise, sunset },
   } = weather;
 
-  // Validation checks
   if (
     !name ||
     !temp ||
     !weatherInfo ||
     !windSpeed ||
     !dt ||
-    !sunrise ||
-    !sunset
+    !temp_min ||
+    !temp_max
   ) {
     console.error("Invalid or missing weather data:", weather);
     return <div className="weather-card error">Invalid weather data</div>;
   }
 
-  // Format date and time
   const dateFormatter = new Intl.DateTimeFormat("en-GB", {
     day: "2-digit",
     month: "2-digit",
@@ -48,8 +45,6 @@ const WeatherCard = ({ weather, error }) => {
 
   const formattedDate = dateFormatter.format(new Date(dt * 1000));
   const formattedTime = timeFormatter.format(new Date(dt * 1000));
-  const formattedSunrise = timeFormatter.format(new Date(sunrise * 1000));
-  const formattedSunset = timeFormatter.format(new Date(sunset * 1000));
 
   return (
     <div className="weather-card">
@@ -70,13 +65,13 @@ const WeatherCard = ({ weather, error }) => {
             {Math.round(windSpeed * 3.6)} km/h
           </span>
         </div>
-        <div className="detail-item">
-          <span className="detail-label">Sunrise:</span>
-          <span className="detail-value">{formattedSunrise}</span>
+        <div className="detail-item temp-min">
+          <span className="detail-label">Min Temp:</span>
+          <span className="detail-value">{Math.round(temp_min)}°C</span>
         </div>
-        <div className="detail-item">
-          <span className="detail-label">Sunset:</span>
-          <span className="detail-value">{formattedSunset}</span>
+        <div className="detail-item temp-max">
+          <span className="detail-label">Max Temp:</span>
+          <span className="detail-value">{Math.round(temp_max)}°C</span>
         </div>
       </div>
       <div className="weather-date">

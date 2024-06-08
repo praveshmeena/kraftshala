@@ -10,7 +10,7 @@ body {
 /* Light Mode */
 .light-mode {
   background-color: #f0f0f0;
-  background-image: url('https://images.unsplash.com/photo-1609435170772-3d911724f233?q=80&w=1826&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-image: url('https://media.istockphoto.com/id/458891043/photo/clouds-in-the-blue-sky.jpg?s=612x612&w=0&k=20&c=1GlfZE0d2du9RNlqXxWK8hBBtDHiA1dN2ik5XRRMz5g=');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -18,18 +18,18 @@ body {
 }
 
 .light-mode .navbar {
-  background-color: #ffffff;
+  background-color: #b2ddef;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .light-mode button {
-  background-color: #007bff;
+  background-color: #87CEEB;
   color: #ffffff;
 }
 
 /* Dark Mode */
 .dark-mode {
-  background-image: url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHdlYXRoZXIlMjBhcHAlMjBmb3IlMjBkYXJrJTIwbW9kZSUyMGFuZCUyMGxpZ2h0JTIwbW9kZXxlbnwwfHwwfHx8MA%3D%3D');
+  background-image: url('https://media.istockphoto.com/id/1340644354/photo/dramatic-blue-green-sky-gloomy-heavy-thunderclouds-dark-teal-sky-background.jpg?s=612x612&w=0&k=20&c=0zsvd0gOppKmPRdvWMqGOUdHDy19MCc-EwZGWzaERT4=');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -120,7 +120,7 @@ main {
 }
 
 .weather-card {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(210, 209, 209, 0.3);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
