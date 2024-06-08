@@ -1,4 +1,9 @@
 import React from "react";
+import feelsLikeIcon from "../assets/thermomater.png";
+import humidityIcon from "../assets/humidity.png";
+import windSpeedIcon from "../assets/windock.png";
+import minTempIcon from "../assets/temorature-min.png";
+import maxTempIcon from "../assets/temprature-max.png";
 
 const WeatherCard = ({ weather, onRemove }) => {
   const {
@@ -40,24 +45,29 @@ const WeatherCard = ({ weather, onRemove }) => {
         <div className="detail-item">
           <span className="detail-label">Feels like:</span>
           <span className="detail-value">{Math.round(feels_like)}°C</span>
+          <img className="detail-img" src={feelsLikeIcon} alt="" />
         </div>
         <div className="detail-item">
           <span className="detail-label">Humidity:</span>
           <span className="detail-value">{humidity}%</span>
+          <img className="detail-img" src={humidityIcon} alt="" />
         </div>
         <div className="detail-item">
           <span className="detail-label">Wind Speed:</span>
           <span className="detail-value">
             {Math.round(windSpeed * 3.6)} km/h
           </span>
+          <img className="detail-img" src={windSpeedIcon} alt="" />
         </div>
         <div className="detail-item temp-min">
           <span className="detail-label">Min Temp:</span>
           <span className="detail-value">{Math.round(temp_min)}°C</span>
+          <img className="detail-img" src={minTempIcon} alt="" />
         </div>
         <div className="detail-item temp-max">
           <span className="detail-label">Max Temp:</span>
           <span className="detail-value">{Math.round(temp_max)}°C</span>
+          <img className="detail-img" src={maxTempIcon} alt="Max temp icon" />
         </div>
       </div>
       <div className="weather-date">

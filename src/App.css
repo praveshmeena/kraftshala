@@ -195,8 +195,16 @@ main {
   border-radius: 4px;
 }
 
+.detail-img{
+  height: 15px;
+  width: 15px;
+}
 .detail-label {
   font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.detail-value{
   margin-right: 0.5rem;
 }
 
